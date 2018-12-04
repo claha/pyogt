@@ -8,6 +8,7 @@ class OGTRest(object):
 
     URL_REST = 'https://rest.ostgotatrafiken.se/'
     METHOD_STOPS_FIND = 'stops/Find'
+    METHOD_STOPS_INFOS = 'stops/Infos'
 
     @staticmethod
     def get(method, params):
@@ -26,6 +27,29 @@ class OGTRest(object):
         params = {
             'q': query,
             'pointType': 'stop',
+        }
+
+        # Send request
+        stops = OGTRest.get(method, params)
+
+        # Convert to list of OGTStop
+        ogt_stops = []
+        if stops is not None:
+            for stop in stops:
+                ogt_stops.append(OGTStop.from_json(stop))
+
+        # Return stops
+        return ogt_stops
+
+    @staticmethod
+    def stops_infos(ids):
+        """Find stops that matches the ids."""
+        # Define method and params
+        method = OGTRest.METHOD_STOPS_INFOS
+        if isinstance(ids, (list,)):
+            ids = ','.join(map(str, ids))
+        params = {
+            'ids': ids,
         }
 
         # Send request
