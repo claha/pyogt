@@ -12,3 +12,14 @@ def find_stop(name):
             return stop
 
     return OGTStop()
+
+
+def find_stop_by_id(id_):
+    """Find a stop by id."""
+    stops = OGTRest.stops_infos(ids=id_)
+
+    for stop in stops:
+        if stop.get_id() == id_:
+            return stop
+
+    return OGTStop()
