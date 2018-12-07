@@ -414,18 +414,14 @@ stops = sorted(set(stops))
 
 
 @pytest.mark.parametrize('name', stops)
-def test_find_stop_by_name(name):
+def test_find_stop(name):
     """Find known stops and check that they exist."""
-    stop = pyogt.find_stop(name)
-    assert stop.get_name() == name
-    assert stop.get_id() != -1
+    # Find stop by name
+    stopByName = pyogt.find_stop(name)
+    assert stopByName.get_name() == name
+    assert stopByName.get_id() != -1
 
-
-@pytest.mark.parametrize('name', stops)
-def test_find_stop_by_id(name):
-    """Find known stops and check that they exist."""
-    stop = pyogt.find_stop(name)
-    id_ = stop.get_id()
-    stop = pyogt.find_stop_by_id(id_)
-    assert stop.get_name() == name
-    assert stop.get_id() == id_
+    # Find the same stop again, this time by id
+    stopById = pyogt.find_stop_by_id(stopByName.get_id())
+    assert stopById.get_name() == stopByName.get_name()
+    assert stopById.get_id() == stopByName.get_id()
