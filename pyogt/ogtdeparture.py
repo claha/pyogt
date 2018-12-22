@@ -4,7 +4,7 @@
 class OGTDeparture(object):
     """Class to store information about a departure."""
 
-    def __init__(self, name, date_time, towards, stop_point):
+    def __init__(self, name='', date_time='', towards='', stop_point=''):
         """Initialize an OGTDeparture."""
         self._name = name
         self._date_time = date_time
@@ -26,23 +26,3 @@ class OGTDeparture(object):
     def get_stop_point(self):
         """Return the stop point of the departure."""
         return self._stop_point
-
-    @staticmethod
-    def from_json(data):
-        """Create an OGTDeparture object from json-data."""
-        name = None
-        date_time = None
-        towards = None
-        stop_point = None
-
-        if 'Ogt' in data:
-            if 'OgtLineUrlSegment' in data['Ogt']:
-                name = data['Ogt']['OgtLineUrlSegment']
-            if 'PassingStops' in data['Ogt']:
-                towards = data['Ogt']['PassingStops'][-1]
-        if 'JourneyDateTime' in data:
-            date_time = data['JourneyDateTime']
-        if 'StopPointAliasFormatted' in data:
-            stop_point = data['StopPointAliasFormatted']
-
-        return OGTDeparture(name, date_time, towards, stop_point)
