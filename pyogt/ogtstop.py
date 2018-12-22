@@ -4,7 +4,7 @@
 class OGTStop(object):
     """Class to store information about a stop."""
 
-    def __init__(self, name='', id_=1, pretty_name=''):
+    def __init__(self, name='', id_=-1, pretty_name=''):
         """Initialize an OGTStop."""
         self._name = name
         self._id = id_
@@ -21,9 +21,3 @@ class OGTStop(object):
     def get_pretty_name(self):
         """Return the pretty name of the stop."""
         return self._pretty_name
-
-    @staticmethod
-    def from_json(data):
-        """Create an OGTStop object from json-data."""
-        return OGTStop(data['OgtStopUrlSegment'],
-                       data['Id'], data['PlaceName'])

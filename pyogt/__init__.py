@@ -23,3 +23,10 @@ def find_stop_by_id(id_):
             return stop
 
     return OGTStop()
+
+
+def get_departures(name):
+    """Get departures from stop."""
+    stop = find_stop(name)
+    departures = OGTRest.stop_departures(stop.get_id())
+    return departures

@@ -1,5 +1,6 @@
 """Tests to find stops."""
 import pytest
+import random
 import pyogt
 
 
@@ -410,7 +411,7 @@ stops = [
     'yrkesvagen',
 
 ]
-stops = sorted(set(stops))
+stops = random.sample(set(stops), 10)
 
 
 @pytest.mark.parametrize('name', stops)
