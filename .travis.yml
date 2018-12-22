@@ -9,7 +9,7 @@ matrix:
       env: TOXENV=py27
     - python: 2.7
       env: TOXENV=cov
-      after_sucess: coveralls
+      after_success: coveralls
 cache: pip
 install: pip install -U tox coveralls
 language: python
