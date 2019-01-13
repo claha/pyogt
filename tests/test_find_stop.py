@@ -426,3 +426,19 @@ def test_find_stop(name):
     stopById = pyogt.find_stop_by_id(stopByName.get_id())
     assert stopById.get_name() == stopByName.get_name()
     assert stopById.get_id() == stopByName.get_id()
+
+
+def test_find_nonexistent_stop_by_name():
+    """Try to find a nonexistent stop by name."""
+    # Find stop by name
+    stopByName = pyogt.find_stop('x')
+    assert stopByName.get_name() == ''
+    assert stopByName.get_id() == -1
+
+
+def test_find_nonexistent_stop_by_id():
+    """Try to find a nonexistent stop by id."""
+    # Find stop by id
+    stopById = pyogt.find_stop_by_id(0)
+    assert stopById.get_name() == ''
+    assert stopById.get_id() == -1
